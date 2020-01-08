@@ -33,8 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['lastname'] = 'Votre nom contient des caractères non autorisés !';
     }
     //contôle de l'âge
-    $options = ['min_range' => 16,  'max_range' => 88];
-     $age = trim(filter_input(INPUT_POST,'age',FILTER_SANITIZE_NUMBER_INT));
+    //tableau d'options qui permet de valider un âge minimum et maximum
+    $options = ['options' => ['min_range' => 16,  'max_range' => 88]];
+    $age = trim(filter_input(INPUT_POST,'age',FILTER_SANITIZE_NUMBER_INT));
     if (empty($age)) {
         $errors['age'] = 'Veuillez renseigner votre âge';
     } elseif (!filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT, $options)) {
